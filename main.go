@@ -58,6 +58,8 @@ func main() {
 	log.Infof("found %v repositories:", len(repos))
 
 	for _, r := range repos {
-		fmt.Println(*r.Name)
+		if !*r.Archived {
+			fmt.Println(*r.Name)
+		}
 	}
 }

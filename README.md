@@ -1,5 +1,7 @@
 # list-github-repos
 
+List active (not archived) repositories for an organization
+
 ## Manual
 
 Run the tool with `TOKEN=xxx ORG=yyy go run main.go` or compile it and run the binary by providing the same env.vars
