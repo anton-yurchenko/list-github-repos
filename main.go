@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/google/go-github/v32/github"
 	"golang.org/x/oauth2"
@@ -55,11 +56,20 @@ func main() {
 		opt.Page = resp.NextPage
 	}
 
-	log.Infof("found %v repositories:", len(repos))
+	log.Infof("total %v repositories", len(repos))
 
+	var archived []string
+	var active []string
 	for _, r := range repos {
 		if !*r.Archived {
-			fmt.Println(*r.Name)
+			active = append(active, *r.Name)
+		} else {
+			archived = append(archived, *r.Name)
 		}
 	}
+
+	log.Infof("%v active repositories", len(active))
+	fmt.Println(strings.Join(active, "\n"))
+	log.Infof("%v archived repositories", len(archived))
+	fmt.Println(strings.Join(archived, "\n"))
 }
